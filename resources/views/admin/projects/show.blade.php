@@ -7,6 +7,11 @@
             <h1>
                 Project: {{ $project->id }} -- {{ $project->name }}
             </h1>
+            <h4>
+                @foreach ($project->technologies as $technology)
+                    {{ $technology->name }}, version {{ $technology->version }} <br>
+                @endforeach
+            </h4>
             <h5>
                 Created by: {{ $project->user->name }}
             </h5>
