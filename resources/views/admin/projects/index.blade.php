@@ -17,7 +17,12 @@
             <ul>
                 @forelse ($projects as $project)
                     <li class="project-element">
-                        {{ $project->id }} ~~ {{ $project->name }}
+                        <h3>
+                            {{ $project->id }} ~~ {{ $project->name }}
+                        </h3>
+                        <p>
+                            A project by <em>{{ $project->user->name }}</em>
+                        </p>
                     </li>
                 @empty
                     <li>

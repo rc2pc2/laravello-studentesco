@@ -7,6 +7,16 @@
             <h1>
                 Project: {{ $project->id }} -- {{ $project->name }}
             </h1>
+            <h5>
+                Created by: {{ $project->user->name }}
+            </h5>
+
+            <h6>
+                Student of: {{ $project->user->studentDetail->class }}
+            </h6>
+            <h6>
+                With an average of: {{ $project->user->studentDetail->average_vote }}
+            </h6>
             <p>
                 {{ $project->description }}
             </p>
