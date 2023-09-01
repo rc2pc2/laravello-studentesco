@@ -10,7 +10,7 @@
             <ul>
                 @forelse ($projects as $project)
                     <li class="project-element">
-                        {{ $project->name }}
+                        {{ $project->id }} ~~ {{ $project->name }}
                     </li>
                 @empty
                     <li>

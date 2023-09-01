@@ -22,7 +22,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.projects.create');
     }
 
     /**
@@ -30,38 +30,55 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $data = $request->validate([
+            'name' => ['required', 'unique:projects', 'max:255', 'min:3'],
+            'description'  => ['required', 'min:10'],
+        ]);
+
+        $project = Project::create($data);
+        return redirect()->route('admin.projects.show', compact('project'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Project $project)
     {
-        //
+        // $project = Project::findOrFail($id);
+
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Project $project)
     {
-        //
+        $data = $request->validate([
+            'name' => ['required', 'unique:projects,name,' . $project->id, 'max:255', 'min:3'],
+            'description'  => ['required', 'min:10'],
+        ]);
+
+        $project->update($data);
+        return redirect()->route('admin.projects.show', compact('project'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return redirect()->route('admin.projects.index');
     }
 }
